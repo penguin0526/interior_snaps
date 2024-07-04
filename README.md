@@ -34,3 +34,6 @@
 - IDE：Cloud9
 ​
 ## 使用素材
+
+## 実装機能リスト
+https://docs.google.com/spreadsheets/d/1tANSMqlbVDk9jZGZIrwG9z4pV1s7LgpTipuTeEKBOj0/edit?usp=sharing
