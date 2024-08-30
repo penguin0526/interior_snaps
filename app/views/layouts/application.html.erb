@@ -14,54 +14,50 @@
   <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg bg-dark">
-        <div class="container">
+        <div class="container-fluid">
           <a class="navbar-brand p-3" href="/">Interior Snaps</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <div class="panel-group">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse1">click me</a>
-                  </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse">
-                  <div class="search">
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="panel-body">内容</div>
-                  <div class="panel-footer">フッター</div>
-                </div>
-              </div>
-            </div>
-            <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to '投稿フォーム', class: 'nav-link text-light' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-light' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'text-light' %>
-            </li>
-            <% else %>
-            <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-light' %>
-            </li>
-            <% end %>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav">
+              <li>
+                <a data-bs-toggle="collapse" href="#collapseExample1">メニュー大</a>
+              </li>
+              <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to '投稿フォーム', class: 'nav-link text-light' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-light' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'text-light' %>
+              </li>
+              <% else %>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-light' %>
+              </li>
+              <% end %>
             </ul>
           </div>
         </div>
       </nav>
     </header>
     <main class="mb-auto">
+      <ul class="collapse" id="collapseExample1">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <li>メニュー小</li>
+        <li>メニュー小</li>
+        <li>メニュー小</li>
+      </ul>
     <%= yield %>
     </main>
     <footer class="bg-dark text-white pt-5 pb-4">
