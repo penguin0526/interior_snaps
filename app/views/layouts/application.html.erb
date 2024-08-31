@@ -13,17 +13,20 @@
 
   <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg bg-dark">
+      <nav class="navbar navbar-expand-lg bg-secondary  p-3">
         <div class="container-fluid">
-          <a class="navbar-brand p-3" href="/">Interior Snaps</a>
+          <a class="navbar-brand p-3 text-light" href="/">Interior Snaps</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="offcanvas-body">
-            <ul class="navbar-nav">
-              <li>
-                <a data-bs-toggle="collapse" href="#collapseExample1">メニュー大</a>
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-link">
+                <a data-bs-toggle="collapse" href="#collapseExample1" class="link-light link-offset-2 link-underline-opacity-0">
+                  <i class="fa-solid fa-magnifying-glass text-light"></i>
+                  検索
+                </a>
               </li>
               <% if user_signed_in? %>
               <li class="nav-item">
@@ -49,14 +52,18 @@
       </nav>
     </header>
     <main class="mb-auto">
-      <ul class="collapse" id="collapseExample1">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <li>メニュー小</li>
-        <li>メニュー小</li>
-        <li>メニュー小</li>
+      <ul class="collapse p-3 mb-2 bg-body-secondary" id="collapseExample1">
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="text-dark">GENRE</div>
+            <div class="text-dark">COLER</div>
+            <div class="text-dark">FLOOR</div>
+            <button class="btn btn-outline-secondary" type="submit">この条件で検索</button>
+          </div>
+        </div>
       </ul>
     <%= yield %>
     </main>
