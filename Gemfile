@@ -65,3 +65,7 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
+
+gem 'rails-i18n'
+gem 'devise-i18n-views'
+gem 'devise-i18n'
