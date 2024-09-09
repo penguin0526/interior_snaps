@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_14_131959) do
+ActiveRecord::Schema.define(version: 2024_09_08_235612) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -81,6 +81,23 @@ ActiveRecord::Schema.define(version: 2024_08_14_131959) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "interior_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_interior_tags_on_name", unique: true
+  end
+
+  create_table "post_interior_tags", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "interior_tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["interior_tag_id"], name: "index_post_interior_tags_on_interior_tag_id"
+    t.index ["post_id", "interior_tag_id"], name: "index_post_interior_tags_on_post_id_and_interior_tag_id", unique: true
+    t.index ["post_id"], name: "index_post_interior_tags_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
@@ -105,4 +122,6 @@ ActiveRecord::Schema.define(version: 2024_08_14_131959) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "post_interior_tags", "interior_tags"
+  add_foreign_key "post_interior_tags", "posts"
 end

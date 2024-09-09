@@ -5,27 +5,42 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @tag_list = InteriorTag.all
   end
 
   def show
     @post = Post.find(params[:id])
+    @user = @post.user
+    @tag_list = @post.interior_tags.pluck(:name).join(',')
+    @post_interior_tags = @post.interior_tags
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to post_path(@post.id)
+    tag_list = params[:post][:name].split(',')
+    if @post.save
+      @post.save_interior_tags(tag_list)
+      redirect_to post_path(@post.id)
+    else
+      render :new
+    end
   end
 
   def edit
     @post = Post.find(params[:id])
+    @tag_list = @post.interior_tags.pluck(:name).join(',')
   end
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to post_path(@post.id)
+    tag_list = params[:post][:name].split(',')
+    if @post.update(post_params)
+      @post.save_interior_tags(tag_list)
+      redirect_to post_path(@post.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -37,12 +52,18 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :user_id, :images => [])
+    params.require(:post).permit(:title, :body, :user_id, images: [])
   end
 
   def correct_user
     @post = Post.find(params[:id])
     @user = @post.user
     redirect_to(posts_path) unless @user == current_user
+  end
+
+  def search_tag
+    @tag_list = InteriorTag.all
+    @tag = InteriorTag.find(params[:interior_tag_id])
+    @posts = @tag.posts
   end
 end

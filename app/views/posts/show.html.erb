@@ -1,2 +1,25 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<% if @post.images.attached? %>
+  <% @post.images.each do |image| %>
+    <div class="mb-2 inline-flex">
+      <%= image_tag(image, width:500) %>
+    </div>
+  <% end %>
+<% end %>
+<div>
+  <p>タイトル</p>
+  <%= @post.title %>
+</div>
+<div>
+  <p>コメント</p>
+  <%= @post.body %>
+</div>
+<div>
+  <%= link_to user_path(@user.id) do %>
+    <%= @post.user.name %>
+  <% end %>
+</div>
+<!-- タグリスト -->
+<% @post_interior_tags.each do |tag| %>
+  <i class="fa-sharp fa-solid fa-tag"></i>
+  <%= link_to tag.name, search_tag_path(interior_tag_id: tag.id) %>
+<% end %>

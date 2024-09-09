@@ -1,13 +1,1 @@
-<div class="container">
-  <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-xs-12 col-sm-6 col-md-3">
-        <%= link_to post_path(post.id) do %>
-          <%= image_tag post.images, size: "100x100" %>
-        <% end %>
-        <%= post.title %>
-        <%= post.user.name %>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render @posts %>
