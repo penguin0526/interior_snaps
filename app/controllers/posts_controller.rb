@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
+
   def new
     @post = Post.new
   end
 
   def index
     @posts = Post.all
+    @post = Post.new
     @tag_list = InteriorTag.all
   end
 
@@ -34,6 +36,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    @post.user_id = current_user.id
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       @post.save_interior_tags(tag_list)

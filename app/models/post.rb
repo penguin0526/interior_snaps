@@ -11,6 +11,8 @@
 #  user_id    :integer
 #
 class Post < ApplicationRecord
+  attr_accessor :name
+
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :post_interior_tags, dependent: :destroy
@@ -21,6 +23,9 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :images, presence: true
   validates :body, presence: true
+
+  after_find :set_name
+  after_save :update_tags
 
   def save_interior_tags(tags)
     current_tags = self.interior_tags.pluck(:name) unless self.interior_tags.nil?
@@ -34,6 +39,29 @@ class Post < ApplicationRecord
     new_tags.each do |new_name|
       interior_tag = InteriorTag.find_or_create_by(name:new_name)
       self.interior_tags << interior_tag
+    end
+  end
+
+  private
+
+  def update_tags
+    if name.present?
+      current_tags = interior_tags.pluck(:name)
+      tags = name.gsub(/[[:space:]]/, "").split(",")
+      old_tags = current_tags - tags
+      new_tags = tags - current_tags
+
+      old_tags.each do |old_name|
+        interior_tag = InteriorTag.find_by(name: old_name)
+        post_interior_tag = post_interior_tags.find_by(interior_tag_id: interior_tag.id)
+        post_interior_tag&.destroy
+        interior_tag.destroy if interior_tag.post_interior_tags.size < 1
+      end
+
+      new_tags.each do |new_name|
+        interior_tag = InteriorTag.find_or_create_by(name: new_name)
+        self.interior_tags << interior_tag
+      end
     end
   end
 end

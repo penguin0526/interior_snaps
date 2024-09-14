@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy, :index]
   resources :comments, only: [:new, :create, :edit, :update, :destroy]
   resources :posts
-  resources :users, only: [:edit, :show, :update, :destroy]
+  resources :users, only: [:edit, :show, :update]
   root to: 'homes#top'
   get '/about' => 'homes#about', as: 'about'
   get '/mypage' => 'users#mypage', as:'mypage'
