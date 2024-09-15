@@ -1,2 +1,24 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h2>プロフィール編集</h2>
+    <%= form_with model: @user do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h3><%= @user.errors.count %> error prohibited this obj from being saved:</h3>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+        </div>
+      <% end %>
+      <div class="mb-4">
+        <%= f.label :user_name, "Name" %>
+        <%= f.text_field :name, class: "form-control name" %>
+      </div>
+      <div class="col-auto">
+        <%= f.submit "保存", class: "btn btn-success mt-4" %>
+      </div>
+    <% end %>
+  </div>
+</div>
