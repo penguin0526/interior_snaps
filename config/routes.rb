@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get :favorites
   end
 end
-  root to: 'homes#top'
+  root to: 'posts#index'
   get '/about' => 'homes#about', as: 'about'
   get '/mypage' => 'users#mypage', as:'mypage'
   get 'search_tag' => 'posts#search_tag'

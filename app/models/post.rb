@@ -64,4 +64,9 @@ class Post < ApplicationRecord
       end
     end
   end
+
+  def set_name
+    tag_names = self.interior_tags.pluck(:name).join(", ")
+    self.name = tag_names
+  end
 end
