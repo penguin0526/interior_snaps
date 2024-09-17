@@ -1,14 +1,15 @@
 <div class="my-8">
   <div id="post-<%= post.id %>" class="mb-3">
-    <p class="font-bold">タイトル：<%= post.title %></p>
     <% if post.images.attached? %>
       <% post.images.each do |image| %>
         <div class="mb-2 inline-flex">
           <%= link_to post_path(post.id) do %>
-            <%= image_tag(image, width:100) %>
+            <%= image_tag(image, size: "300x200") %>
           <% end %>
         </div>
       <% end %>
     <% end %>
+    <p class="font-bold">タイトル:<%= link_to post.title, post_path(post.id) %></p>
+    <p>投稿者:<%= post.user.name %></p>
   </div>
 </div>

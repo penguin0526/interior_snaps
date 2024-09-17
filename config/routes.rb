@@ -9,10 +9,13 @@ Rails.application.routes.draw do
   resources :comments, only: [:new, :create, :edit, :update, :destroy]
   resources :posts
   resources :users do
-  member do
-    get :favorites
+    member do
+      get :favorites
+    end
   end
-end
+  resources :tags do
+    get 'posts', to: 'posts#search'
+  end
   root to: 'posts#index'
   get '/about' => 'homes#about', as: 'about'
   get '/mypage' => 'users#mypage', as:'mypage'

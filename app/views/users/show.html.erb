@@ -3,4 +3,16 @@
   <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
 <% end %>
 <%= link_to "いいねした投稿", favorites_user_path(@user) %>
-  <%= render "posts/post", post: @post %>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td>
+      <%= link_to post_path(post.id) do %>
+        <%= image_tag post.images.first, size: "300x200" if post.images.attached? %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to post.title, post_path(post.id), class: "post_#{post.id}" %>
+    </td>
+  </tr>
+<% end %>

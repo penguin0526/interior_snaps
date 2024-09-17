@@ -51,6 +51,12 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to user_path(@user.id)
   end
+  
+  def search
+    @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
+    @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
+    @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
+  end
 
   private
 
@@ -69,4 +75,12 @@ class PostsController < ApplicationController
     @tag = InteriorTag.find(params[:interior_tag_id])
     @posts = @tag.posts
   end
+    if params[:search].present?
+      items = Item.items_serach(params[:search])
+    elsif params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      items = @tag.items.order(created_at: :desc)
+    else
+      items = Item.all.order(created_at: :desc)
+    end
 end
