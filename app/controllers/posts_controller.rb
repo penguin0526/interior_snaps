@@ -51,7 +51,22 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to user_path(@user.id)
   end
-  
+
+  def search_tag
+    @tag_list = InteriorTag.all
+    @tag = InteriorTag.find(params[:interior_tag_id])
+    @posts = @tag.posts.all
+
+    if params[:search].present?
+      @posts = Post.posts_search(params[:search])
+    elsif params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @posts = @tag.posts.order(created_at: :desc)
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
+  end
+
   def search
     @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
     @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
@@ -70,17 +85,4 @@ class PostsController < ApplicationController
     redirect_to(posts_path) unless @user == current_user
   end
 
-  def search_tag
-    @tag_list = InteriorTag.all
-    @tag = InteriorTag.find(params[:interior_tag_id])
-    @posts = @tag.posts
-  end
-    if params[:search].present?
-      items = Item.items_serach(params[:search])
-    elsif params[:tag_id].present?
-      @tag = Tag.find(params[:tag_id])
-      items = @tag.items.order(created_at: :desc)
-    else
-      items = Item.all.order(created_at: :desc)
-    end
 end
