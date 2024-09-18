@@ -8,12 +8,14 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy, :index]
   resources :comments, only: [:new, :create, :edit, :update, :destroy]
   resources :posts
+  
   resources :users do
     member do
       get :favorites
     end
   end
-  resources :tags do
+  
+  resources :interior_tags do
     get 'posts', to: 'posts#search'
   end
   root to: 'posts#index'

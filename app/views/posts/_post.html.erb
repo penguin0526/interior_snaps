@@ -1,3 +1,9 @@
+<%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
+    <% tag.all.each do |t| %>
+        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+    <% end %>
+    <%= submit_tag '検索' %>
+<% end %>
 <div class="my-8">
   <div id="post-<%= post.id %>" class="mb-3">
     <% if post.images.attached? %>
