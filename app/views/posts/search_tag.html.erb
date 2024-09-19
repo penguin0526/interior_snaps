@@ -1,6 +1,20 @@
-<!--タグリスト-->
-<% @tag_list.each do |list|%>
-  <i class="fa-sharp fa-solid fa-tag"></i>
-  <%=link_to list.name,search_tag_path(interior_tag_id: list.id) %>
-  <%="(#{list.posts.count})" %>
-<% end %>
+<h2>投稿一覧</h2>
+<div id="タグによって絞り込んだ投稿一覧">
+  <div>タグが<%= @tag.name %>の投稿一覧</div>
+  <br>
+  <% @posts.each do |post| %>
+    <tr>
+      <td>
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.images.first, size: "300x200" if post.images.attached? %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to post.title, post_path(post.id), class: "post_#{post.id}" %>
+      </td>
+    </tr>
+  <% end %>
+</div>
+<div>
+  <%= link_to 'ホーム', root_path %>
+</div>

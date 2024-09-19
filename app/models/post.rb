@@ -42,6 +42,11 @@ class Post < ApplicationRecord
     end
   end
 
+  def content
+    # 適切な値を返すように実装する
+    body
+  end
+
   private
 
   def update_tags
@@ -69,4 +74,7 @@ class Post < ApplicationRecord
     tag_names = self.interior_tags.pluck(:name).join(", ")
     self.name = tag_names
   end
+
+  scope :from_interior_tag, -> (interior_tag_id)  { where(id: post_ids = PostInteriorTag.where(interior_tag_id: interior_tag_id).select(:post_id))}
+
 end

@@ -56,14 +56,11 @@ class PostsController < ApplicationController
     @tag_list = InteriorTag.all
     @tag = InteriorTag.find(params[:interior_tag_id])
     @posts = @tag.posts.all
-
-    if params[:search].present?
-      @posts = Post.posts_search(params[:search])
-    elsif params[:tag_id].present?
-      @tag = Tag.find(params[:tag_id])
-      @posts = @tag.posts.order(created_at: :desc)
+    if params[:interior_tag_id]
+      @selected_interior_tag = InteriorTag.find(params[:interior_tag_id])
+      @posts = Post.from_interior_tag(params[:interior_tag_id])
     else
-      @posts = Post.all.order(created_at: :desc)
+      @posts = Post.all
     end
   end
 
