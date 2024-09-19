@@ -56,17 +56,7 @@
     </header>
     <main class="mb-auto">
       <ul class="collapse p-3 mb-2 bg-body-secondary" id="collapseExample1">
-        <div class="row g-3 align-items-center">
-          <div class="col-auto">
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
-            <div class="text-dark">GENRE</div>
-            <div class="text-dark">COLER</div>
-            <div class="text-dark">FLOOR</div>
-            <button class="btn btn-outline-secondary" type="submit">この条件で検索</button>
-          </div>
-        </div>
+        <%= render "posts/_search", tag_lists: @tag_lists %>
       </ul>
     <%= yield %>
     </main>
