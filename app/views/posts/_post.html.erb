@@ -1,17 +1,19 @@
-<div class="my-8">
-  <div id="post-<%= post.id %>" class="mb-3">
-    <% if post.images.attached? %>
-      <% post.images.each do |image| %>
-        <div class="mb-2 inline-flex">
-          <%= link_to post_path(post.id) do %>
-            <%= image_tag(image, size: "300x200") %>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
-    <p class="font-bold">タイトル:<%= link_to post.title, post_path(post.id) %></p>
-    <p>投稿者:<%= post.user.name %></p>
-    <i class="fa fa-heart unlike-btn"></i>
-    <%= post.favorites.length %>
+<div class="col">
+  <div class="card" style="width: 18rem;">
+    <div id="post-<%= post.id %>">
+      <div>
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.images.first, class: "card-img-top" %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <h6>
+          <p class="card-title font-bold">タイトル:<%= link_to post.title, post_path(post.id) %></p>
+        </h6>
+        <p>投稿者:<%= post.user.name %></p>
+        <i class="fa fa-heart unlike-btn"></i>
+        <%= post.favorites.length %>
+      </div>
+    </div>
   </div>
 </div>

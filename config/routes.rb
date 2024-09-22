@@ -24,6 +24,5 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   get '/about' => 'homes#about', as: 'about'
-  get '/mypage' => 'users#mypage', as:'mypage'
   get 'search_tag' => 'posts#search_tag'
 end
