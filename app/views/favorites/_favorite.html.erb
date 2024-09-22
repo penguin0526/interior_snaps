@@ -1,0 +1,14 @@
+<% if !user_signed_in? %>
+  <i class="fa fa-heart favorite-btn"></i>
+  <%= post.favorites.length %>
+<% elsif current_user.favorited_by?(post.id) %>
+  <%= link_to post_favorite_path(post, post.favorites), class: "favorite-link", method: :delete, remote: true do %>
+    <i class="fa fa-heart unlike-btn"></i>
+  <% end %>
+  <%= post.favorites.length %>
+<% else %>
+  <%= link_to post_favorites_path(post), class: "favorite-link", method: :post, remote: true do %>
+    <i class="fa fa-heart like-btn"></i>
+  <% end %>
+  <%= post.favorites.length %>
+<% end %>

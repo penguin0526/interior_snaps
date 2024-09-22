@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @tag_lists = InteriorTag.all
   end
 
   def index
@@ -25,6 +26,7 @@ class PostsController < ApplicationController
     @user = @post.user
     @tag_list = @post.interior_tags.pluck(:name).join(',')
     @post_interior_tags = @post.interior_tags
+    @tag_lists = InteriorTag.all
   end
 
   def create
@@ -42,6 +44,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @tag_list = @post.interior_tags.pluck(:name).join(',')
+    @tag_lists = InteriorTag.all
   end
 
   def update
@@ -66,6 +69,7 @@ class PostsController < ApplicationController
     @tag_list = InteriorTag.all
     @tag = InteriorTag.find(params[:interior_tag_id])
     @posts = @tag.posts.all
+    @tag_lists = InteriorTag.all
     if params[:interior_tag_id]
       @selected_interior_tag = InteriorTag.find(params[:interior_tag_id])
       @posts = Post.from_interior_tag(params[:interior_tag_id])

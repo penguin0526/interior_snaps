@@ -6,15 +6,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts
     @post = Post.new
-
-    if params[:search].present?
-      @posts = Post.posts_serach(params[:search])
-    elsif params[:interior_tag_id].present?
-      @tag = InteriorTag.find(params[:interior_tag_id])
-      @posts = @tag.posts.order(created_at: :desc)
-    else
-      @posts = Post.all.order(created_at: :desc)
-    end
     @tag_lists = InteriorTag.all
   end
 
@@ -30,11 +21,14 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @tag_lists = InteriorTag.all
   end
 
   def favorites
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
+    @tag_lists = InteriorTag.all
+
   end
 
   private

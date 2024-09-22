@@ -3,5 +3,6 @@ class HomesController < ApplicationController
   end
 
   def about
+    @tag_lists = InteriorTag.all
   end
 end

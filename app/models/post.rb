@@ -15,6 +15,7 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
   has_many :post_interior_tags, dependent: :destroy
   has_many :interior_tags, through: :post_interior_tags
   belongs_to :user
@@ -26,6 +27,10 @@ class Post < ApplicationRecord
 
   after_find :set_name
   after_save :update_tags
+
+  def self.items_serach(search)
+   Post.where(['title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%"])
+  end
 
   def save_interior_tags(tags)
     current_tags = self.interior_tags.pluck(:name) unless self.interior_tags.nil?

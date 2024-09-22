@@ -23,3 +23,12 @@
   <i class="fa-sharp fa-solid fa-tag"></i>
   <%= link_to tag.name, search_tag_path(interior_tag_id: tag.id) %>
 <% end %>
+<div id = "favorite_<%= @post.id %>">
+  <%= render partial: "favorites/favorite", locals: { post: @post } %>
+</div>
+<div>
+  <%= link_to "編集", edit_post_path(@post) %>
+  <% if @post.user == current_user %>
+    <%= link_to "削除", post_path(@post), method: :delete %>
+  <% end %>
+</div>

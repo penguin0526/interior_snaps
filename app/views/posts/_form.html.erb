@@ -24,5 +24,10 @@
         </div>
       <% end %>
     </div>
+    <% if post.new_record? %>
+      <%= link_to "戻る", root_path %>
+    <% else %>
+      <%= link_to "戻る", post_path(post) %>
+    <% end %>
   </div>
 </div>

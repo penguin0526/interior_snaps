@@ -9,8 +9,8 @@
 #  user_id    :integer
 #
 class Favorite < ApplicationRecord
-  belongs_to :users
-  belongs_to :posts
+  belongs_to :user
+  belongs_to :post
 
-  validates :user_id, uniqueness: {scope: :post_id}
+  validates_uniqueness_of :post_id, scope: :user_id
 end

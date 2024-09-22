@@ -25,10 +25,15 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :favorites
+  has_many :favorited_posts, through: :favorites, source: :post
 
   validates:name,
     presence:true,
     length:{minimum:2,maximum:20},
     uniqueness:true
+
+  def favorited_by?(post_id)
+    favorites.where(post_id: post_id).exists?
+  end
 end
