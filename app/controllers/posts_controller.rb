@@ -27,6 +27,7 @@ class PostsController < ApplicationController
     @tag_list = @post.interior_tags.pluck(:name).join(',')
     @post_interior_tags = @post.interior_tags
     @tag_lists = InteriorTag.all
+    @post_comment = PostComment.new
   end
 
   def create

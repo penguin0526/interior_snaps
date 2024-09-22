@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   }
 
   devise_for :users
-  resources :comments, only: [:new, :create, :edit, :update, :destroy]
 
   resources :users do
     member do
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
+    resources :post_comments, only: [:create]
     resources :favorites, only: [:create, :destroy]
   end
 

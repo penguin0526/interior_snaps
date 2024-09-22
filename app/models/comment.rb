@@ -10,6 +10,6 @@
 #  user_id    :integer
 #
 class Comment < ApplicationRecord
-  belongs_to :users
-  belongs_to :posts
+  belongs_to :user
+  belongs_to :post
 end
