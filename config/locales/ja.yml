@@ -2,6 +2,6 @@ ja:
   activerecord:
     attributes:
       user:
-        name: "名前"
+        name: "ユーザーネーム"
   activemodel:   # Formオブジェクトを用いた場合
      attributes:
