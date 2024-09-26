@@ -1,47 +1,87 @@
-<% if @post.images.attached? %>
-  <% @post.images.each do |image| %>
-    <div class="mb-2 inline-flex">
-      <%= image_tag(image, width:500) %>
+<div class="row">
+  <div class="post-title">
+    <h1><%= @post.title %></h1>
+  </div>
+</div>
+<div class="post-info">
+  <div class="d-flex">
+    <p class="post-time fw-bold text-secondary mb-0">
+      <i class="fa-regular fa-clock"></i>
+      <%= @post.created_at.strftime('%Y.%m.%d') %>
+    </p>
+    <p class="post-user-name fw-bold text-secondary px-2 mb-0">
+      <i class="fa-solid fa-user"></i>
+      <%= link_to @post.user.name, user_path(@post.user.id), class: "post-link text-secondary
+      link-offset-2 link-offset-3-hover link-underline-secondary
+      link-underline-opacity-0 link-underline-opacity-75-hover" %>
+    </p>
+  </div>
+  <ul class="post-tags breadcrumb p-0 mb-0">
+    <h6><i class="fa-sharp fa-solid fa-tag text-secondary pe-1 pt-1"></i></h6>
+    <% @post_interior_tags.each do |tag| %>
+      <%= link_to tag.name, search_tag_path(interior_tag_id: tag.id), class: "breadcrumb-item
+      text-success link-offset-2 link-offset-3-hover link-underline-success
+      link-underline-opacity-0 link-underline-opacity-75-hover" %>
+    <% end %>
+  </ul>
+  <div id="favorite_<%= @post.id %>">
+    <%= render partial: "favorites/favorite", locals: { post: @post } %>
+  </div>
+</div>
+<div class="row">
+  <span class="border-top bg-success my-4"></span>
+  <% if @post.images.attached? %>
+    <% @post.images.each do |image| %>
+      <div class="col-2 mb-2 d-flex" style="max-width: 100%;">
+        <%= image_tag image.variant(gravity: :center, resize: "150x150^", crop: "150x150+0+0").processed, class: "img-thumbnail" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="row post-menu d-grid gap-2 col-2 mx-auto">
+  <% if @post.user == current_user %>
+    <%= link_to "編集", edit_post_path(@post), class: "btn btn-success my-1" %>
+    <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-success my-1" %>
+  <% end %>
+</div>
+<div class="row">
+  <span class="border-top bg-success my-4"></span>
+  <div class="col d-flex my-1">
+    <h6><i class="fa-regular fa-comment fa-flip-horizontal ps-1 pt-1"></i>コメント：</h6>
+    <%= @post.comments.count %>
+  </div>
+</div>
+<div class="row">
+  <% @post.comments.each do |comment| %>
+    <div class="col-5 comment-info m-1">
+      <h5>
+        <p class="comment-user fw-bold text-secondary mt-2">
+          <i class="fa-solid fa-user"></i>
+          <%= link_to comment.user.name, user_path(comment.user.id), class: "post-link text-secondary
+          link-offset-2 link-offset-3-hover link-underline-secondary
+          link-underline-opacity-0 link-underline-opacity-75-hover" %>
+        </p>
+      </h5>
+      <p class="comments">
+        <%= comment.comment %>
+      </p>
+      <p class="comment-time fw-bold text-secondary mb-2">
+        <i class="fa-regular fa-clock"></i>
+        <%= comment.created_at.strftime('%Y.%m.%d') %>
+      </p>
     </div>
   <% end %>
-<% end %>
-<div>
-  <p>タイトル</p>
-  <%= @post.title %>
 </div>
-<div>
-  <p>コメント</p>
-  <%= @post.body %>
-</div>
-<div>
-  <%= link_to user_path(@user.id) do %>
-    <%= @post.user.name %>
-  <% end %>
-</div>
-<!-- タグリスト -->
-<% @post_interior_tags.each do |tag| %>
-  <i class="fa-sharp fa-solid fa-tag"></i>
-  <%= link_to tag.name, search_tag_path(interior_tag_id: tag.id) %>
-<% end %>
-<div id = "favorite_<%= @post.id %>">
-  <%= render partial: "favorites/favorite", locals: { post: @post } %>
-</div>
-<div>
-  <%= link_to "編集", edit_post_path(@post) %>
-  <% if @post.user == current_user %>
-    <%= link_to "削除", post_path(@post), method: :delete %>
-  <% end %>
-</div>
-<div>
-  <p>コメント件数：<%= @post.comments.count %></p>
-  <% @post.comments.each do |comment| %>
-    <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-  <% end %>
-</div>
-<div>
-  <%= form_with model: [@post, @comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
+<div class="row my-4">
+  <div class="col">
+    <h5>コメントを追加</h5>
+    <%= form_with model: [@post, @comment] do |f| %>
+      <div class="coment-from my-2 ">
+        <%= f.text_area :comment, :size=>"50x5", rows: '5', placeholder: "コメントをここに" %>
+      </div>
+      <div class="d-grid col-1">
+        <%= f.submit "送信", class: "btn btn-success" %>
+      </div>
+    <% end %>
+  </div>
 </div>

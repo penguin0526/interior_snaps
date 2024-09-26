@@ -3,12 +3,16 @@ class FavoritesController < ApplicationController
   before_action :post_params, only: [:create, :destroy]
 
   def create
-    Favorite.create(user_id: current_user.id, post_id: @post.id)
+    if Favorite.create(user_id: current_user.id, post_id: @post.id)
+      redirect_to post_path(@post.id)
+    end
   end
 
   def destroy
-    favorite = Favorite.find_by(user_id: current_user.id, post_id: @post.id)
-    favorite.destroy
+    if favorite = Favorite.find_by(user_id: current_user.id, post_id: @post.id)
+      favorite.destroy
+      redirect_to post_path(@post.id)
+    end
   end
 
   private
