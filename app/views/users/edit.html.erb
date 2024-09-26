@@ -1,27 +1,32 @@
-<div class="container">
-  <div class="row">
-    <h2>プロフィール編集</h2>
-    <%= form_with model: @user do |f| %>
-      <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h3><%= @user.errors.count %> error prohibited this obj from being saved:</h3>
-            <ul>
-              <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-        </div>
-      <% end %>
-      <div class="mb-4">
-        <%= f.label :user_name, "Name" %>
-        <%= f.text_field :name, class: "form-control name" %>
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="text-center text-dark bg-light py-4 mb-0">プロフィール編集</h5>
       </div>
-      <div class="col-auto">
-        <%= f.submit "保存", class: "btn btn-success mt-4" %>
+      <div class="card-body">
+        <%= form_with model: @user do |f| %>
+          <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="mb-3">
+            <%= f.label :name, "ユーザーネーム" %>
+            <%= f.text_field :name, class: "form-control name" %>
+          </div>
+          <div class="d-grid -gap2">
+            <%= f.submit "保存", class: "btn btn-success mt-2" %>
+          </div>
+        <% end %>
       </div>
-      <div class="col-auto">
-        <%= link_to "戻る", user_path(@user), class: "btn btn-success mt-4" %>
+      <div class="card-footer text-center">
+        <%= link_to "戻る", user_path(@user), class: "btn btn-secondary d-grid gap-2 col-2 mx-auto" %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

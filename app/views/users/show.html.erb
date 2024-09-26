@@ -1,18 +1,42 @@
-<h2><%= @user.name %></h2>
-<% if @user == current_user %>
-  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-<% end %>
-<%= link_to "いいねした投稿", favorites_user_path(@user) %>
-
-<% @posts.each do |post| %>
-  <tr>
-    <td>
-      <%= link_to post_path(post.id) do %>
-        <%= image_tag post.images.first, size: "300x200" if post.images.attached? %>
-      <% end %>
-    </td>
-    <td>
-      <%= link_to post.title, post_path(post.id), class: "post_#{post.id}" %>
-    </td>
-  </tr>
-<% end %>
+<div class="row px-1">
+  <div class="col">
+    <h3><%= @user.name %></h3>
+    <% if @user == current_user %>
+      <div class="user-menu">
+        <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-secondary" %>
+        <%= link_to "いいねした投稿", favorites_user_path(@user), class: "btn btn-outline-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row row-cols-1 row-cols-md-5 g-4 mt-1">
+  <% @posts.each do |post| %>
+    <div class="col">
+      <div class="card" style="max-width: 540px;">
+        <div id="post-<%= @post.id %>">
+          <div>
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag post.images.first.variant(gravity: :center, resize: "300x300^", crop: "300x300+0+0").processed, class: "card-img-top" %>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h6>
+              <p class="card-title font-bold">
+                <i class="fa-solid fa-house text-secondary"></i>
+                <%= link_to post.title, post_path(post.id), class: "post-link text-secondary link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover post_#{post.id}" %>
+              </p>
+            </h6>
+            <div class="card-user">
+              <i class="fa-solid fa-user text-secondary"></i>
+              <%= link_to post.user.name, user_path(post.user.id), class: "post-link text-secondary link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover" %>
+            </div>
+            <div class="favorite-icon">
+              <i class="fa fa-heart unlike-btn text-secondary"></i>
+              <%= post.favorites.length %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
