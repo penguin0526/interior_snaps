@@ -6,17 +6,16 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
     @post = Post.new
     @tag_list = InteriorTag.all
 
     if params[:search].present?
-      @posts = Post.posts_serach(params[:search])
+      @posts = Post.posts_serach(params[:search]).page(params[:page])
     elsif params[:interior_tag_id].present?
       @tag = InteriorTag.find(params[:interior_tag_id])
-      @posts = @tag.posts.order(created_at: :desc)
+      @posts = @tag.posts.order(created_at: :desc).page(params[:page])
     else
-      @posts = Post.all.order(created_at: :desc)
+      @posts = Post.all.order(created_at: :desc).page(params[:page])
     end
     @tag_lists = InteriorTag.all
   end
@@ -63,7 +62,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to user_path(@user.id)
+    redirect_to root_path
   end
 
   def search_tag

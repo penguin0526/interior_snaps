@@ -57,7 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
   gem 'devise'
   gem 'annotate'
-  gem 'pagy'
+gem 'kaminari','~> 1.2.1'
 
 group :development do
   gem 'rubocop', require: false
