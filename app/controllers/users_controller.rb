@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if  @user.update(user_params)
-      redirect_to user_path(@user.id), notice: 'You have updated user successfully.'
+      redirect_to user_path(@user.id), notice: "ユーザーネームを変更しました。"
     else
       flash.now[:error] = @user.errors.full_messages.join(", ")
       render :edit
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
 
   def favorites
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
+    @favorite_posts = Post.where(id: favorites).page(params[:page])
     @tag_lists = InteriorTag.all
-
+    @posts = @favorite_posts
   end
 
   private

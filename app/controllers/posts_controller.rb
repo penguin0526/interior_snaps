@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.save
       @post.save_interior_tags(tag_list)
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post.id), notice: "投稿に成功しました。"
     else
       render :new
     end
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       @post.save_interior_tags(tag_list)
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post.id), notice: "投稿を変更しました。"
     else
       render :edit
     end
@@ -66,15 +66,16 @@ class PostsController < ApplicationController
   end
 
   def search_tag
+    @post = Post.new
     @tag_list = InteriorTag.all
     @tag = InteriorTag.find(params[:interior_tag_id])
-    @posts = @tag.posts.all
+    @posts = @tag.posts.all.page(params[:page])
     @tag_lists = InteriorTag.all
     if params[:interior_tag_id]
       @selected_interior_tag = InteriorTag.find(params[:interior_tag_id])
-      @posts = Post.from_interior_tag(params[:interior_tag_id])
+      @posts = Post.from_interior_tag(params[:interior_tag_id]).page(params[:page])
     else
-      @posts = Post.all
+      @posts = Post.all.page(params[:page])
     end
   end
 

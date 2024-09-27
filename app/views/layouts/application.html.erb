@@ -73,6 +73,11 @@
         </div>
       </ul>
       <div class="container mt-3 mb-3">
+        <div class="row my-2 text-success">
+          <% flash.each do |message_type, message| %>
+            <%= content_tag :div, message, class: message_type %>
+          <% end %>
+        </div>
         <%= yield %>
       </div>
     </main>

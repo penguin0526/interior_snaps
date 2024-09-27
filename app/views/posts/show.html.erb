@@ -41,7 +41,7 @@
 <div class="row post-menu d-grid gap-2 col-2 mx-auto">
   <% if @post.user == current_user %>
     <%= link_to "編集", edit_post_path(@post), class: "btn btn-success my-1" %>
-    <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-success my-1" %>
+    <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-success my-1" %>
   <% end %>
 </div>
 <div class="row">

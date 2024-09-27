@@ -4,3 +4,6 @@
 <div class="row row-cols-1 row-cols-md-5 g-4 mt-1">
   <%= render partial: "posts/post", collection: @favorite_posts %>
 </div>
+<div class="d-grid gap-2 col-2 mx-auto my-3">
+  <%= paginate @posts, theme: 'bootstrap-5' %>
+</div>

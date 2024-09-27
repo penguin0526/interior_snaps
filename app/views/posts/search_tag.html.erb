@@ -1,20 +1,37 @@
-<h2>投稿一覧</h2>
-<div id="タグによって絞り込んだ投稿一覧">
-  <div><%= @tag.name %>の投稿一覧</div>
-  <br>
+<div class="row px-1">
+  <h3><%= @tag.name %>の投稿一覧</h3>
+</div>
+<div class="row row-cols-1 row-cols-md-5 g-4 mt-1">
   <% @posts.each do |post| %>
-    <tr>
-      <td>
-        <%= link_to post_path(post.id) do %>
-          <%= image_tag post.images.first, size: "300x200" if post.images.attached? %>
-        <% end %>
-      </td>
-      <td>
-        <%= link_to post.title, post_path(post.id), class: "post_#{post.id}" %>
-      </td>
-    </tr>
+    <div class="col">
+      <div class="card" style="max-width: 540px;">
+        <div id="post-<%= @post.id %>">
+          <div>
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag post.images.first.variant(gravity: :center, resize: "300x300^", crop: "300x300+0+0").processed, class: "card-img-top" %>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h6>
+              <p class="card-title font-bold">
+                <i class="fa-solid fa-house text-secondary"></i>
+                <%= link_to post.title, post_path(post.id), class: "post-link text-secondary link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover post_#{post.id}" %>
+              </p>
+            </h6>
+            <div class="card-user">
+              <i class="fa-solid fa-user text-secondary"></i>
+              <%= link_to post.user.name, user_path(post.user.id), class: "post-link text-secondary link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover" %>
+            </div>
+            <div class="favorite-icon">
+              <i class="fa fa-heart unlike-btn text-secondary"></i>
+              <%= post.favorites.length %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
-<div>
-  <%= link_to 'ホーム', root_path %>
+<div class="d-grid gap-2 col-2 mx-auto my-3">
+  <%= paginate @posts, theme: 'bootstrap-5' %>
 </div>
