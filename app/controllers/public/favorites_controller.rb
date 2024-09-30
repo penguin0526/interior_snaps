@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+class Public::FavoritesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :post_params, only: [:create, :destroy]
 

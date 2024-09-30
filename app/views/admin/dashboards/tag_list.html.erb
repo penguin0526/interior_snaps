@@ -1,0 +1,16 @@
+<h3>タグ一覧</h3>
+<div class="row g-3 align-items-center mt-3">
+  <div class="uk-text-secondary uk-text-bold">
+    <ul class="breadcrumb uk-flex-wrap d-inline-flex p-2">
+      <% @tag_lists.each do |tag| %>
+        <div class="breadcrumb-item mb-2">
+          <%= tag.name %>
+          <%= link_to '削除', admin_interior_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-outline-success" %>
+        </div>
+      <% end %>
+    </ul>
+  <div class="uk-text-secondary uk-text-bold">
+</div>
+<div class="d-grid gap-2 col-2 mx-auto">
+  <%= paginate @tag_lists, theme: 'bootstrap-5' %>
+</div>

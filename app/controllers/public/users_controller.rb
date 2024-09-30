@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Public::UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :set_user, only: [:favorites]
 

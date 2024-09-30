@@ -1,0 +1,11 @@
+<h3>全ユーザー一覧</h3>
+<div class="row mt-3">
+  <ul>
+    <% @users.each do |user| %>
+      <li class="fw-bold text-secondary px-2 mb-0">
+        <i class="fa-solid fa-user px-1"></i><%= user.name %> - <i class="fa-solid fa-envelope px-1"></i><%= user.email %>
+        <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-outline-success" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
