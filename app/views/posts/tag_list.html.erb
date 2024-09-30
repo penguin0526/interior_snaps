@@ -1,0 +1,21 @@
+<div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <div class="uk-text-secondary uk-text-bold">
+      <h3>タグ一覧</h3>
+    </div>
+  </div>
+</div>
+<div class="row g-3 align-items-center">
+  <div class="uk-text-secondary uk-text-bold">
+    <ul class="breadcrumb uk-flex-wrap d-inline-flex p-2">
+      <% @tag_lists.each do |tag| %>
+        <%= link_to tag.name, search_tag_path(interior_tag_id: tag.id), class: "breadcrumb-item
+        text-success link-offset-2 link-offset-3-hover link-underline-success
+        link-underline-opacity-0 link-underline-opacity-75-hover" %>
+      <% end %>
+    </ul>
+  <div class="uk-text-secondary uk-text-bold">
+</div>
+<div class="d-grid gap-2 col-2 mx-auto">
+  <%= paginate @tag_lists, theme: 'bootstrap-5' %>
+</div>

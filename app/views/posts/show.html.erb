@@ -1,3 +1,8 @@
+<div class="row my-2 text-success">
+  <% flash.each do |message_type, message| %>
+    <%= content_tag :div, message, class: message_type %>
+  <% end %>
+</div>
 <div class="row">
   <div class="post-title">
     <h1><%= @post.title %></h1>
@@ -30,13 +35,23 @@
 </div>
 <div class="row">
   <span class="border-top bg-success my-4"></span>
+  <div class="img-thumbnail">
+    <div class="col" id="largeImageContainer" style="max-width: 100%;">
+      <img class="img-fluid mx-auto d-block" id="largeImage" src="">
+    </div>
+  </div>
+</div>
+<div class="row my-3">
   <% if @post.images.attached? %>
     <% @post.images.each do |image| %>
       <div class="col-2 mb-2 d-flex" style="max-width: 100%;">
-        <%= image_tag image.variant(gravity: :center, resize: "150x150^", crop: "150x150+0+0").processed, class: "img-thumbnail" %>
+        <%= image_tag image, size: "200", class: "small-image img-thumbnail" %>
       </div>
     <% end %>
   <% end %>
+</div>
+<div class="row my-3">
+  <p class="post-body fw-bold"><%= @post.body %></p>
 </div>
 <div class="row post-menu d-grid gap-2 col-2 mx-auto">
   <% if @post.user == current_user %>

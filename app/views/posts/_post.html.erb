@@ -10,12 +10,16 @@
         <h6>
           <p class="card-title font-bold">
             <i class="fa-solid fa-house text-secondary"></i>
-            <%= link_to post.title, post_path(post.id), class: "post-link text-secondary link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover" %>
+            <%= link_to post.title, post_path(post.id), class: "post-link text-secondary
+            link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0
+            link-underline-opacity-75-hover" %>
           </p>
         </h6>
         <div class="card-user">
           <i class="fa-solid fa-user text-secondary"></i>
-          <%= link_to post.user.name, user_path(post.user.id), class: "post-link text-secondary link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0 link-underline-opacity-75-hover" %>
+          <%= link_to post.user.name, user_path(post.user.id), class: "post-link text-secondary
+          link-offset-2 link-offset-3-hover link-underline-secondary link-underline-opacity-0
+          link-underline-opacity-75-hover" %>
         </div>
         <div class="favorite-icon">
           <i class="fa fa-heart unlike-btn text-secondary"></i>

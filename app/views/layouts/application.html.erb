@@ -56,29 +56,25 @@
       </nav>
     </header>
     <main class="mb-auto">
-      <ul class="collapse p-3 mb-2 bg-body-secondary" id="collapseExample1">
-        <div class="row g-3 align-items-center">
-          <div class="col-auto">
-            <form>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputtag">
+      <ul class="collapse bg-body-secondary" id="collapseExample1">
+        <div class="row align-items-center">
+          <form>
+            <div class="col-sm-5 pt-2 d-inline-flex">
+              <input type="text" class="form-control" id="inputtag">
+              <div class="col text-nowrap px-2">
+                <button type="search" class="btn btn-primary">検索</button>
               </div>
-              <button type="search" class="btn btn-primary">検索</button>
-            </form>
-            <li class="search_friend_by_categorize">
-              <div class="uk-text-secondary uk-text-bold">
-                タグで探す
-              </div>
-            </li>
+            </div>
+          </form>
+          <div class="col py-3 d-inline-flex">
+            <h6><i class="fa-sharp fa-solid fa-tag text-secondary pe-1 pt-1"></i></h6>
+            <%= link_to "タグ一覧", tag_list_path, class: "text-success link-offset-2
+            link-offset-3-hover link-underline-success link-underline-opacity-0
+            link-underline-opacity-75-hover" %>
           </div>
         </div>
       </ul>
       <div class="container mt-3 mb-3">
-        <div class="row my-2 text-success">
-          <% flash.each do |message_type, message| %>
-            <%= content_tag :div, message, class: message_type %>
-          <% end %>
-        </div>
         <%= yield %>
       </div>
     </main>

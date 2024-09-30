@@ -79,6 +79,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def tag_list
+    @tag_lists = InteriorTag.all.page(params[:page]).per(30)  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
+  end
+
   def search
     @tag_list = InteriorTag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
     @tag = InteriorTag.find(params[:interior_tag_id])  #クリックしたタグを取得
