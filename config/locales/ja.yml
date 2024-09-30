@@ -3,8 +3,10 @@ ja:
     attributes:
       user:
         name: "ユーザーネーム"
-  activemodel:   # Formオブジェクトを用いた場合
-     attributes:
+      post:
+        title: "タイトル"
+        images: "画像"
+        body: "コメント"
   views:
     pagination:
       first: <i class="fas fa-angle-double-left"></i>
