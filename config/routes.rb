@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :interior_tags, only: [:destroy]
     get 'user_list' => 'dashboards#user_list'
     get 'tag_list' => 'dashboards#tag_list'
+    get 'comment_list' => 'dashboards#comment_list'
   end
 
   scope module: :public do

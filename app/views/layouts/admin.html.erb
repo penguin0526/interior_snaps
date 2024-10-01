@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Admin - Meshiterro</title>
+    <title>Admin - InteriorSnaps</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -28,6 +28,9 @@
                 </li>
                 <li class="nav-item">
                   <%= link_to 'タグ一覧', admin_tag_list_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'コメント一覧', admin_comment_list_path, class: 'nav-link text-light' %>
                 </li>
                 <li class="nav-item">
                   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>

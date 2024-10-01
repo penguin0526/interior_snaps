@@ -25,4 +25,9 @@ class Admin::DashboardsController < ApplicationController
     @tag_lists = InteriorTag.all.page(params[:page]).per(100)
   end
 
+  def comment_list
+    @comments = Comment.all.page(params[:page]).per(50)
+    @users = User.all
+  end
+
 end
