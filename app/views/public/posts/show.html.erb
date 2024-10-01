@@ -92,11 +92,16 @@
     <h5>コメントを追加</h5>
     <%= form_with model: [@post, @comment] do |f| %>
       <div class="coment-from my-2 ">
-        <%= f.text_area :comment, :size=>"50x5", rows: '5', placeholder: "コメントをここに" %>
+        <%= f.text_area :comment, :size=>"50x5", rows: '5', placeholder: "50字まで" %>
       </div>
       <div class="d-grid col-1">
         <%= f.submit "送信", class: "btn btn-success" %>
       </div>
+    <% end %>
+  </div>
+  <div class="my-3">
+    <% if current_user == nil %>
+      <p>投稿には<%= link_to "ログイン", new_user_session_path %>が必要です</p>
     <% end %>
   </div>
 </div>

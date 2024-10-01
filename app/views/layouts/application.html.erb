@@ -59,10 +59,12 @@
       <ul class="collapse bg-body-secondary" id="collapseExample1">
         <div class="row align-items-center">
           <%= form_with url: root_path, method: :get do |f| %>
-            <div class="col-sm-5 pt-2 d-inline-flex">
-              <%= f.search_field :search, class: "form-control" %>
-              <%= f.collection_select :interior_tag_id, InteriorTag.all, :id, :name, { include_blank: "--select tag--", selected: params[:interior_tag_id] }, { class: "form-control" } %>
-              <div class="col text-nowrap px-2">
+            <div class="col-sm-4 pt-2 d-inline-flex">
+              <%= f.search_field :search, class: "form-control", placeholder: "キーワードを入力してください" %>
+              <div class="col-4 px-2">
+                <%= f.collection_select :interior_tag_id, InteriorTag.all, :id, :name, { include_blank: "--select tag--", selected: params[:interior_tag_id] }, { class: "form-control" } %>
+              </div>
+              <div class="col-2 text-nowrap px-2">
                 <%= f.submit "検索", class: "btn btn-primary" %>
               </div>
             </div>
