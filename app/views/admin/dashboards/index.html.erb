@@ -5,7 +5,7 @@
       <div class="card" style="max-width: 540px;">
         <div id="post-<%= @post.id %>">
           <div>
-            <%= link_to post_path(post.id) do %>
+            <%= link_to admin_post_path(post.id) do %>
               <%= image_tag post.images.first.variant(gravity: :center, resize: "300x300^", crop: "300x300+0+0").processed, class: "card-img-top" %>
             <% end %>
           </div>

@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -10,7 +12,7 @@ class Public::PostsController < ApplicationController
     @tag_list = InteriorTag.all
 
     if params[:search].present?
-      @posts = Post.posts_serach(params[:search]).page(params[:page])
+      @posts = Post.where('title LIKE ?', "%#{params[:search]}%").page(params[:page])
     elsif params[:interior_tag_id].present?
       @tag = InteriorTag.find(params[:interior_tag_id])
       @posts = @tag.posts.order(created_at: :desc).page(params[:page])
@@ -96,9 +98,7 @@ class Public::PostsController < ApplicationController
   end
 
   def correct_user
-    @post = Post.find(params[:id])
-    @user = @post.user
-    redirect_to(posts_path) unless @user == current_user
+    @post = current_user.posts.find_by_id(params[:id])
+    redirect_to root_path unless @post
   end
-
 end

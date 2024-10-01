@@ -58,14 +58,15 @@
     <main class="mb-auto">
       <ul class="collapse bg-body-secondary" id="collapseExample1">
         <div class="row align-items-center">
-          <form>
+          <%= form_with url: root_path, method: :get do |f| %>
             <div class="col-sm-5 pt-2 d-inline-flex">
-              <input type="text" class="form-control" id="inputtag">
+              <%= f.search_field :search, class: "form-control" %>
+              <%= f.collection_select :interior_tag_id, InteriorTag.all, :id, :name, { include_blank: "--select tag--", selected: params[:interior_tag_id] }, { class: "form-control" } %>
               <div class="col text-nowrap px-2">
-                <button type="search" class="btn btn-primary">検索</button>
+                <%= f.submit "検索", class: "btn btn-primary" %>
               </div>
             </div>
-          </form>
+          <% end %>
           <div class="col py-3 d-inline-flex">
             <h6><i class="fa-sharp fa-solid fa-tag text-secondary pe-1 pt-1"></i></h6>
             <%= link_to "タグ一覧", tag_list_path, class: "text-success link-offset-2

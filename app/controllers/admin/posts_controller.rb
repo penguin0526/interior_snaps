@@ -1,5 +1,11 @@
 class Admin::PostsController < ApplicationController
-
+  layout 'admin'
+  before_action :authenticate_admin!
+  
+  def show
+    @post = Post.find(params[:id])
+  end
+  
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
