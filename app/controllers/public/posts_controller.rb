@@ -29,6 +29,7 @@ class Public::PostsController < ApplicationController
     @post_interior_tags = @post.interior_tags
     @tag_lists = InteriorTag.all
     @comment = Comment.new
+    @comments = @post.comments.page(params[:page]).per(4)
   end
 
   def create
@@ -64,7 +65,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: "投稿を削除しました。"
   end
 
   def search_tag

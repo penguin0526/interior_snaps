@@ -67,7 +67,7 @@
   </div>
 </div>
 <div class="row">
-  <% @post.comments.each do |comment| %>
+  <% @comments.each do |comment| %>
     <div class="col-5 comment-info m-1">
       <h5>
         <p class="comment-user fw-bold text-secondary mt-2">
@@ -84,8 +84,14 @@
         <i class="fa-regular fa-clock"></i>
         <%= comment.created_at.strftime('%Y.%m.%d') %>
       </p>
+      <% if comment.user == current_user %>
+        <%= link_to "削除", post_comment_path(comment.post, comment), class: "btn btn-secondary", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <% end %>
     </div>
   <% end %>
+</div>
+<div class="d-grid gap-2 mx-auto">
+  <%= paginate @comments, theme: 'bootstrap-5' %>
 </div>
 <div class="row my-4">
   <div class="col">

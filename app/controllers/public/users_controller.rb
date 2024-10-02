@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_user, only: [:favorites]
 
   def show
@@ -23,6 +23,13 @@ class Public::UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @tag_lists = InteriorTag.all
+  end
+
+  def destroy
+      @user = User.find(params[:id])
+      @user.destroy
+      flash[:notice] = "ユーザーを削除しました。"
+      redirect_to :root
   end
 
   def favorites
