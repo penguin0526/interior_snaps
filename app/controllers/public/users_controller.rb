@@ -28,8 +28,7 @@ class Public::UsersController < ApplicationController
   def destroy
       @user = User.find(params[:id])
       @user.destroy
-      flash[:notice] = "ユーザーを削除しました。"
-      redirect_to :root
+      redirect_to :root, notice: "退会しました。"
   end
 
   def favorites
