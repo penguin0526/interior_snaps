@@ -33,5 +33,6 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about', as: 'about'
     get 'search_tag' => 'posts#search_tag'
     get 'tag_list' => 'posts#tag_list'
+    get '/favicon.ico', to: 'application#favicon'
   end
 end
