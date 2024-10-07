@@ -1,0 +1,80 @@
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.2.0/gems/puma-5.0.0/ext/puma_http11
+/home/ec2-user/.rvm/rubies/ruby-3.2.1/bin/ruby -I /home/ec2-user/.rvm/rubies/ruby-3.2.1/lib/ruby/3.2.0 extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+checking for DTLS_method() in openssl/ssl.h... yes
+checking for TLS_server_method() in openssl/ssl.h... yes
+checking for SSL_CTX_set_min_proto_version in openssl/ssl.h... yes
+creating Makefile
+
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.2.0/gems/puma-5.0.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20241007-6172-meczfm sitelibdir\=./.gem.20241007-6172-meczfm clean
+
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.2.0/gems/puma-5.0.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20241007-6172-meczfm sitelibdir\=./.gem.20241007-6172-meczfm
+compiling http11_parser.c
+compiling mini_ssl.c
+mini_ssl.c: In function ‘get_dh1024’:
+mini_ssl.c:65:5: warning: old-style function definition [-Wold-style-definition]
+   65 | DH *get_dh1024() {
+      |     ^~~~~~~~~~
+mini_ssl.c:89:3: warning: ‘DH_new’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+   89 |   dh = DH_new();
+      |   ^~
+In file included from /usr/include/openssl/dsa.h:51,
+                 from /usr/include/openssl/x509.h:37,
+                 from /usr/include/openssl/ssl.h:31,
+                 from mini_ssl.c:15:
+/usr/include/openssl/dh.h:203:27: note: declared here
+  203 | OSSL_DEPRECATEDIN_3_0 DH *DH_new(void);
+      |                           ^~~~~~
+mini_ssl.c:104:3: warning: ‘DH_set0_pqg’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  104 |   if (p == NULL || g == NULL || !DH_set0_pqg(dh, p, NULL, g)) {
+      |   ^~
+In file included from /usr/include/openssl/dsa.h:51,
+                 from /usr/include/openssl/x509.h:37,
+                 from /usr/include/openssl/ssl.h:31,
+                 from mini_ssl.c:15:
+/usr/include/openssl/dh.h:259:27: note: declared here
+  259 | OSSL_DEPRECATEDIN_3_0 int DH_set0_pqg(DH *dh, BIGNUM *p, BIGNUM *q, BIGNUM *g);
+      |                           ^~~~~~~~~~~
+mini_ssl.c:105:5: warning: ‘DH_free’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  105 |     DH_free(dh);
+      |     ^~~~~~~
+In file included from /usr/include/openssl/dsa.h:51,
+                 from /usr/include/openssl/x509.h:37,
+                 from /usr/include/openssl/ssl.h:31,
+                 from mini_ssl.c:15:
+/usr/include/openssl/dh.h:204:28: note: declared here
+  204 | OSSL_DEPRECATEDIN_3_0 void DH_free(DH *dh);
+      |                            ^~~~~~~
+mini_ssl.c: In function ‘engine_init_server’:
+mini_ssl.c:145:7: warning: unused variable ‘min’ [-Wunused-variable]
+  145 |   int min, ssl_options;
+      |       ^~~
+mini_ssl.c: In function ‘raise_error’:
+mini_ssl.c:299:6: warning: function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+  299 | void raise_error(SSL* ssl, int result) {
+      |      ^~~~~~~~~~~
+mini_ssl.c: At top level:
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling puma_http11.c
+puma_http11.c: In function ‘Init_puma_http11’:
+puma_http11.c:441:6: warning: old-style function definition [-Wold-style-definition]
+  441 | void Init_puma_http11()
+      |      ^~~~~~~~~~~~~~~~
+puma_http11.c: At top level:
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+linking shared-object puma/puma_http11.so
+
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.2.0/gems/puma-5.0.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20241007-6172-meczfm sitelibdir\=./.gem.20241007-6172-meczfm install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20241007-6172-meczfm/puma
+
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.2.0/gems/puma-5.0.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20241007-6172-meczfm sitelibdir\=./.gem.20241007-6172-meczfm clean

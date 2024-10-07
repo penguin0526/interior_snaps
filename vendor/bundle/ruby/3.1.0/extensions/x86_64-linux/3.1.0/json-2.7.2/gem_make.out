@@ -1,0 +1,13 @@
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.1.0/gems/json-2.7.2/ext/json
+/home/ec2-user/.rvm/rubies/ruby-3.1.2/bin/ruby -I /home/ec2-user/.rvm/rubies/ruby-3.1.2/lib/ruby/3.1.0 -r ./siteconf20241007-8109-6uyppl.rb extconf.rb
+creating Makefile
+
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.1.0/gems/json-2.7.2/ext/json
+make DESTDIR\= clean
+
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.1.0/gems/json-2.7.2/ext/json
+make DESTDIR\=
+make: Nothing to be done for 'all'.
+
+current directory: /home/ec2-user/environment/interior_snaps/vendor/bundle/ruby/3.1.0/gems/json-2.7.2/ext/json
+make DESTDIR\= install
