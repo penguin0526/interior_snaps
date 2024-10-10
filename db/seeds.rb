@@ -5,10 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-InteriorTag.create([
-  { name: 'モダン' },
-  { name: '黒' },
-  { name: '白' },
-  { name: 'アーバン' },
-  { name: 'かわいい' }
-])
+
+penguin = User.find_or_create_by!(email: "penguin@example.com") do |user|
+  user.name = "Penguin"
+  user.password = "password"
+end
+
+mga = User.find_or_create_by!(email: "mga@example.com") do |user|
+  user.name = "Mga"
+  user.password = "password"
+end
+
+kazunari = User.find_or_create_by!(email: "Kazunari@example.com") do |user|
+  user.name = "Kazunari"
+  user.password = "password"
+end
+
+Post.find_or_create_by!(name: "黒モダンな部屋") do |post|
+  post.images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
+  post.body = "こんな部屋に住みたい"
+  post.user = penguin
+end
