@@ -25,7 +25,7 @@ kazunari = User.find_or_create_by!(email: "Kazunari@example.com") do |user|
   user.password = "password"
 end
 
-Post.find_or_create_by!(name: "黒モダンな部屋") do |post|
+Post.find_or_create_by!(title: "黒モダンな部屋") do |post|
   post.images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
   post.body = "こんな部屋に住みたい"
   post.user = penguin
